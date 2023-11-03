@@ -24,8 +24,8 @@ public class User : Entity<int>
         FirstName = string.Empty;
         LastName = string.Empty;
         Email = string.Empty;
-        PasswordHash = Array.Empty<byte>();
         PasswordSalt = Array.Empty<byte>();
+        PasswordHash = Array.Empty<byte>();
     }
 
     public User(

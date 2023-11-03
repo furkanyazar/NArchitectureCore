@@ -2,7 +2,7 @@
 
 namespace Core.Security.Entities;
 
-public class RefreshToken : Entity<int>
+public class RefreshToken : Entity<Guid>
 {
     public int UserId { get; set; }
     public string Token { get; set; }
@@ -11,7 +11,6 @@ public class RefreshToken : Entity<int>
     public DateTime? Revoked { get; set; }
     public string? RevokedByIp { get; set; }
     public string? ReplacedByToken { get; set; }
-
     public string? ReasonRevoked { get; set; }
 
     public virtual User User { get; set; } = null!;
@@ -22,20 +21,48 @@ public class RefreshToken : Entity<int>
         CreatedByIp = string.Empty;
     }
 
-    public RefreshToken(int userId, string token, DateTime expires, string createdByIp)
+    public RefreshToken(
+        int userId,
+        string token,
+        DateTime expires,
+        string createdByIp,
+        DateTime? revoked,
+        string? revokedByIp,
+        string? replacedByToken,
+        string? reasonRevoked
+    )
     {
         UserId = userId;
         Token = token;
         Expires = expires;
         CreatedByIp = createdByIp;
+        Revoked = revoked;
+        RevokedByIp = revokedByIp;
+        ReplacedByToken = replacedByToken;
+        ReasonRevoked = reasonRevoked;
     }
 
-    public RefreshToken(int id, int userId, string token, DateTime expires, string createdByIp)
+    public RefreshToken(
+        Guid id,
+        int userId,
+        string token,
+        DateTime expires,
+        string createdByIp,
+        DateTime? revoked,
+        string? revokedByIp,
+        string? replacedByToken,
+        string? reasonRevoked
+    )
         : base(id)
     {
+        Id = id;
         UserId = userId;
         Token = token;
         Expires = expires;
         CreatedByIp = createdByIp;
+        Revoked = revoked;
+        RevokedByIp = revokedByIp;
+        ReplacedByToken = replacedByToken;
+        ReasonRevoked = reasonRevoked;
     }
 }

@@ -17,15 +17,18 @@ public class OperationClaim : Entity<int>
         Value = string.Empty;
     }
 
-    public OperationClaim(string name, string value)
+    public OperationClaim(int? parentOperationClaimId, string name, string value)
     {
+        ParentOperationClaimId = parentOperationClaimId;
         Name = name;
         Value = value;
     }
 
-    public OperationClaim(int id, string name, string value)
+    public OperationClaim(int id, int? parentOperationClaimId, string name, string value)
         : base(id)
     {
+        Id = id;
+        ParentOperationClaimId = parentOperationClaimId;
         Name = name;
         Value = value;
     }

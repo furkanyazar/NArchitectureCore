@@ -12,16 +12,19 @@ public class EmailAuthenticator : Entity<int>
 
     public EmailAuthenticator() { }
 
-    public EmailAuthenticator(int userId, bool isVerified)
+    public EmailAuthenticator(int userId, string? activationKey, bool ısVerified)
     {
         UserId = userId;
-        IsVerified = isVerified;
+        ActivationKey = activationKey;
+        IsVerified = ısVerified;
     }
 
-    public EmailAuthenticator(int id, int userId, bool isVerified)
+    public EmailAuthenticator(int id, int userId, string? activationKey, bool ısVerified)
         : base(id)
     {
+        Id = id;
         UserId = userId;
-        IsVerified = isVerified;
+        ActivationKey = activationKey;
+        IsVerified = ısVerified;
     }
 }
