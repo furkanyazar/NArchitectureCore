@@ -6,7 +6,6 @@ public class RequestParameter
 {
     public string Key { get; set; }
     public string Value { get; set; }
-    public ParameterType ParameterType { get; set; }
 
     public RequestParameter()
     {
@@ -14,10 +13,9 @@ public class RequestParameter
         Value = string.Empty;
     }
 
-    public RequestParameter(string key, string value, ParameterType parameterType)
+    public RequestParameter(string key, string value)
     {
         Key = key;
         Value = value;
-        ParameterType = parameterType;
     }
 }

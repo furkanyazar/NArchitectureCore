@@ -42,7 +42,7 @@ public class RestSharpRequestService : IRestSharpRequestService
 
         if (options.Parameters is not null)
             foreach (var param in options.Parameters)
-                request.Parameters.AddParameter(Parameter.CreateParameter(param.Key, param.Value, param.ParameterType));
+                request.AddParameter(param.Key, param.Value);
 
         return request;
     }
