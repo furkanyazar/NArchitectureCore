@@ -15,7 +15,8 @@ public class ElasticSearchLogger : LoggerServiceBase
             configuration.GetSection(configurationSection).Get<ElasticSearchConfiguration>()
             ?? throw new NullReferenceException($"\"{configurationSection}\" section cannot found in configuration.");
 
-        Logger = new LoggerConfiguration().WriteTo
+        Logger = new LoggerConfiguration()
+            .WriteTo
             .Elasticsearch(
                 new ElasticsearchSinkOptions(new Uri(logConfiguration.ConnectionString))
                 {

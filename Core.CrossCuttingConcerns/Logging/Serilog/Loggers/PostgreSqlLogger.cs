@@ -27,7 +27,8 @@ public class PostgreSqlLogger : LoggerServiceBase
             { "machine_name", new SinglePropertyColumnWriter(propertyName: "MachineName", format: "l") }
         };
 
-        global::Serilog.Core.Logger loggerConfiguration = new LoggerConfiguration().WriteTo
+        global::Serilog.Core.Logger loggerConfiguration = new LoggerConfiguration()
+            .WriteTo
             .PostgreSQL(
                 postgreConfiguration.ConnectionString,
                 postgreConfiguration.TableName,

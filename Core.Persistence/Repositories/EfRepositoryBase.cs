@@ -1,11 +1,11 @@
-﻿using Core.Persistence.Dynamic;
+﻿using System.Collections;
+using System.Linq.Expressions;
+using System.Reflection;
+using Core.Persistence.Dynamic;
 using Core.Persistence.Paging;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Query;
-using System.Collections;
-using System.Linq.Expressions;
-using System.Reflection;
 
 namespace Core.Persistence.Repositories;
 
@@ -341,7 +341,8 @@ public class EfRepositoryBase<TEntity, TEntityId, TContext> : IAsyncRepository<T
         bool hasEntityHaveOneToOneRelation =
             Context
                 .Entry(entity)
-                .Metadata.GetForeignKeys()
+                .Metadata
+                .GetForeignKeys()
                 .All(
                     x =>
                         x.DependentToPrincipal?.IsCollection == true
@@ -362,7 +363,8 @@ public class EfRepositoryBase<TEntity, TEntityId, TContext> : IAsyncRepository<T
 
         var navigations = Context
             .Entry(entity)
-            .Metadata.GetNavigations()
+            .Metadata
+            .GetNavigations()
             .Where(x => x is { IsOnDependent: false, ForeignKey.DeleteBehavior: DeleteBehavior.ClientCascade or DeleteBehavior.Cascade })
             .ToList();
         foreach (INavigation? navigation in navigations)
@@ -412,7 +414,8 @@ public class EfRepositoryBase<TEntity, TEntityId, TContext> : IAsyncRepository<T
 
         var navigations = Context
             .Entry(entity)
-            .Metadata.GetNavigations()
+            .Metadata
+            .GetNavigations()
             .Where(x => x is { IsOnDependent: false, ForeignKey.DeleteBehavior: DeleteBehavior.ClientCascade or DeleteBehavior.Cascade })
             .ToList();
         foreach (INavigation? navigation in navigations)

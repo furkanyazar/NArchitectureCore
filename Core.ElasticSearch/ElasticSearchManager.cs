@@ -50,12 +50,14 @@ public class ElasticSearchManager : IElasticSearch
         if (elasticClient.Indices.Exists(indexModel.IndexName).Exists)
             return new ElasticSearchResult(success: false, message: "Index already exists");
 
-        CreateIndexResponse? response = await elasticClient.Indices.CreateAsync(
-            indexModel.IndexName,
-            selector: se =>
-                se.Settings(a => a.NumberOfReplicas(indexModel.NumberOfReplicas).NumberOfShards(indexModel.NumberOfShards))
-                    .Aliases(x => x.Alias(indexModel.AliasName))
-        );
+        CreateIndexResponse? response = await elasticClient
+            .Indices
+            .CreateAsync(
+                indexModel.IndexName,
+                selector: se =>
+                    se.Settings(a => a.NumberOfReplicas(indexModel.NumberOfReplicas).NumberOfShards(indexModel.NumberOfShards))
+                        .Aliases(x => x.Alias(indexModel.AliasName))
+            );
 
         return new ElasticSearchResult(response.IsValid, message: response.IsValid ? "Success" : response.ServerError.Error.Reason);
     }

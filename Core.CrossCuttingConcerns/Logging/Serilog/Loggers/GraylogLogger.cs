@@ -15,7 +15,8 @@ public class GraylogLogger : LoggerServiceBase
             configuration.GetSection(configurationSection).Get<GraylogConfiguration>()
             ?? throw new NullReferenceException($"\"{configurationSection}\" section cannot found in configuration.");
 
-        Logger = new LoggerConfiguration().WriteTo
+        Logger = new LoggerConfiguration()
+            .WriteTo
             .Graylog(
                 new GraylogSinkOptions
                 {
